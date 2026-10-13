@@ -1,0 +1,22 @@
+# Credenciales y claves
+*.key
+*.pem
+*.token
+.env
+id_rsa*
+
+# Archivos pesados de virtualización e imágenes
+*.iso
+*.qcow2
+*.vmdk
+*.raw
+*.tar.gz
+*.backup
+*.dump
+
+# Temporales del sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*~

@@ -1,0 +1,17 @@
+# Proyecto Intermodular: nodo Proxmox individual
+
+Alumno/a: aljarilla_jose
+
+URL GitHub: https://github.com/GitAljarilla27/pi-proxmox-Aljarilla-Jose.git
+
+## Objetivo
+Desplegar y administrar un servicio Linux en Proxmox VE mediante automatización con Bash y Ansible
+
+## Modalidad
+
+Virtualizada (entorno en aula)
+
+## Indice de documentacion
+
+- [Ficha inicial](docs/00-ficha-inicial.md)
+- [Bita
