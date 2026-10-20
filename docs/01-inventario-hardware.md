@@ -65,8 +65,4 @@ El hardware tiene dos limitaciones claras: los **8 GB de RAM**, que obligan a aj
 * **Apto con condiciones para la propuesta actual.** 
 * **Síntesis:** El hardware disponible (`ad-ochoa`, 8GB RAM, Intel VT-x) cumple estrictamente los requisitos para alojar Proxmox VE y sostener un esquema básico de servidor y cliente. Las condiciones críticas para su éxito son la gestión milimétrica de la RAM (no superando las 2-3 máquinas virtuales simultáneas y evitando interfaces gráficas pesadas) y el escalonamiento en el uso de los discos virtuales, dado el evidente cuello de botella que representa el HDD mecánico Toshiba. 
 
-## Evidencias y revisión docente
-* `../evidencias/S02-hardware-pci-red.jpeg`
-* `../evidencias/S02-ram-free-h.jpeg`
-* `../evidencias/S02-discos-lsblk.jpeg`
-* `../evidencias/S02-cpu-virtualizacion-vtx.jpeg`
+
