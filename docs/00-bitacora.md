@@ -32,3 +32,30 @@
   - Ninguna incidencia relevante en la recolección de datos.
 - **Siguiente paso:**
   - Desplegar Proxmox VE (o su máquina virtual anidada), configurar las interfaces `vmbr0` y `vmbr1`, y comprobar conectividad.
+## Sesión 03 - 2026-11-10
+
+- **Objetivo:** Instalar y configurar Proxmox VE en VirtualBox, comprobar la conectividad y verificar los recursos disponibles.
+- **Acciones realizadas:**
+  - Creación de una máquina virtual con 8 GB de RAM, 2 vCPU y 80 GB de almacenamiento.
+  - Instalación de Proxmox VE 9.2.2 con hostname `pve-aljarilla.lab.test`.
+  - Configuración de la red solo-anfitrión `vboxnet0` en VirtualBox.
+  - Configuración de los puentes `vmbr0` (NAT) y `vmbr1` (solo-anfitrión).
+  - Acceso a la interfaz web de Proxmox mediante `https://192.168.56.10:8006`.
+  - Comprobación de la virtualización anidada, interfaces de red y almacenamiento.
+  - Organización de las capturas de instalación en el repositorio GitHub.
+- **Pruebas y resultados:**
+  - Se verificó el funcionamiento de `vmbr0` (`10.0.2.15/24`) y `vmbr1` (`192.168.56.10/24`).
+  - Se comprobó la puerta de enlace `10.0.2.2`.
+  - El comando `grep -Ec '(vmx|svm)' /proc/cpuinfo` devolvió `8`.
+  - Se verificó la disponibilidad de los almacenamientos `local` y `local-lvm`.
+  - Se confirmó el acceso al panel de administración web.
+- **Decisiones y motivos:**
+  - Se utilizó VirtualBox para ejecutar Proxmox mediante virtualización anidada.
+  - Se configuraron dos adaptadores para separar la conexión NAT de la red de gestión.
+  - Se empleó almacenamiento dinámico para evitar reservar inicialmente los 80 GB completos en el anfitrión.
+- **Incidencias:**
+  - Se corrigieron errores de escritura en los comandos de comprobación del hostname.
+  - Se observó un error de actualización de paquetes pendiente de revisión.
+  - Queda pendiente revisar la resolución del hostname respecto a la IP de gestión.
+- **Siguiente paso:**
+  - Completar las comprobaciones del nodo y preparar las máquinas virtuales Ubuntu Server sin entorno gráfico.
