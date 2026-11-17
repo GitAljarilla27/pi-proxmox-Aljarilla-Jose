@@ -31,12 +31,42 @@ Disponer de un entorno aislado, flexible y documentado para la ejecución y mant
 | **Unidad Óptica** | 1024M - ATAPI iHAS124 F |
 | **Tarjetas de red** | 1x interfaz física (`eth0`) |
 
-## 7. Diseño de Red y Direccionamiento Inicial
+## 7. Diseño de Red y Direccionamiento
 
-| Interfaz / Bridge | Estado / IP Actual | Propósito en el entorno |
+### 7.1. Interfaces del anfitrión físico
+
+Durante el inventario inicial se identificaron las siguientes interfaces:
+
+| Interfaz | Dirección / Estado | Función |
 |---|---|---|
-| `eth0` | DOWN | Interfaz física principal del equipo host |
-| `virbr0` | 192.168.122.1/24 | Puente virtual de KVM/libvirt (creado por el host) |
-| `docker0` | 172.17.0.1/16 | Puente de red del demonio Docker local |
-| `vmbr0` | **Pendiente** | Futura red de administración de Proxmox |
-| `vmbr1` | **Pendiente** | Futura red interna/aislada para servicios |
+| `eth0` | DOWN | Interfaz física del anfitrión |
+| `virbr0` | 192.168.122.1/24 | Red virtual de KVM/libvirt |
+| `docker0` | 172.17.0.1/16 | Red virtual de Docker |
+
+Estos datos corresponden al inventario inicial del equipo anfitrión.
+
+### 7.2. Interfaces del nodo Proxmox
+
+Tras instalar Proxmox VE en VirtualBox, se configuraron dos adaptadores conectados a los siguientes puentes:
+
+| Interfaz | Dirección IP | Función |
+|---|---|---|
+| `nic0` → `vmbr0` | 10.0.2.15/24 | Salida a Internet mediante NAT de VirtualBox |
+| `nic1` → `vmbr1` | 192.168.56.10/24 | Red local y administración del nodo |
+
+La puerta de enlace predeterminada es `10.0.2.2`, asociada a `vmbr0`.
+
+La interfaz web de administración está disponible en:
+
+`https://192.168.56.10:8006`
+
+### 7.3. Red prevista para las máquinas invitadas
+
+| Máquina | Dirección IP prevista | Gateway |
+|---|---|---|
+| `srv-aso` | 192.168.56.20/24 | 192.168.56.10 |
+| `cli-linux` | 192.168.56.30/24 | 192.168.56.10 |
+
+Se ha creado y arrancado `srv-aso`, pero todavía está pendiente de completar y validar su configuración IPv4.
+
+El nodo Proxmox dispone de una regla NAT temporal para la red `192.168.56.0/24`. Su funcionamiento desde los invitados y su persistencia tras reiniciar siguen pendientes de comprobación.
